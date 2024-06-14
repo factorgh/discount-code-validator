@@ -15,7 +15,7 @@ function generateRandomCode(length) {
   return crypto.randomBytes(length).toString("hex").substring(0, length);
 }
 
-app.post("/generate", (req, res) => {
+app.post("api/v1/code/generate", (req, res) => {
   const code = generateRandomCode(10);
   const expirationDate = moment().add(24, "hours").toDate();
   const discountCode = {
@@ -29,7 +29,7 @@ app.post("/generate", (req, res) => {
   res.json(discountCode);
 });
 
-app.post("/apply", (req, res) => {
+app.post("api/v1/code/apply", (req, res) => {
   const { code, totalAmount } = req.body;
   const discountCode = discountCodes.find((dc) => dc.code === code);
 
