@@ -10,11 +10,12 @@ const getAllUsers = async (req, res) => {
 };
 
 const registerUser = async (req, res) => {
-  const { name, email } = req.body;
-  const user = new User({ name, email, discountCodes: [] });
-
   try {
-    await user.save();
+    const { name, email } = req.body;
+    const discountCodes = [];
+    console.log(name, email, discountCodes);
+    const user = await User.create({ name, email, discountCodes });
+
     res.status(200).send(user);
   } catch (error) {
     console.log(error.message);
@@ -26,7 +27,7 @@ const loginUser = async (req, res) => {
     const { name, email } = req.body;
 
     const singleUser = await User.findOne({ email });
-
+    console.log(singleUser);
     if (!singleUser) return res.send("No user found");
 
     res.status(200).send(singleUser);

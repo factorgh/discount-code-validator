@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import DiscountCode from "./discountCode.js";
+// import DiscountCode from "./discountCode.js";
 const user = new mongoose.Schema({
   name: {
     type: String,
